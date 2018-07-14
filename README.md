@@ -1,5 +1,42 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
+
+### Introduction 
+In this project, the goal is to drive the car in the simulator provided by udacity which can plan path trjactory. The communication between the simulator and the path planner is done using WebSocket. The path planner uses the uWebSockets WebSocket implementation to the communication.
+
+### Model documentation
+
+the starter code is based is the behavior planning part  of the car, from the sensor information shown below, the  car can tell each each car's position  of its enviroment,.
+
+$$
+for ( int i = 0; i < sensor_fusion.size(); i++ ) {
+    float d = sensor_fusion[i][6];
+    int car_lane = -1;
+    if ( d > 0 && d < 4 ) {
+    car_lane = 0;
+    } else if ( d > 4 && d < 8 ) {
+    car_lane = 1;
+    } else if ( d > 8 && d < 12 ) {
+    car_lane = 2;
+    }
+$$
+
+after each surrounding car's position is known, from code main.cpp 296  to 315,  beased on the previous decisison making , we can decide whether to change or stay in lane, After the car makes the desicision, from the project code walkthrough  Q&A,  the path planning is started by generating 5 future points , then by using spline.h library, based on the target point, we generate total 50 points to the next_vals, by keeping update the total 50 points we gerneate the path planning tajectory.
+
+#### Pass the Test Road
+car is able to drive at least 4.32 miles without incident.
+The car drives according to the speed limit.
+Max Acceleration and Jerk are not Exceeded.
+Car does not have collisions.
+The car stays in its lane, except for the time between changing lanes.
+The car is able to change lanes
+
+shown in picture
+![title](images/img1.png)
+
+
+
+
    
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
